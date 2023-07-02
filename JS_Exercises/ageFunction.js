@@ -1,9 +1,11 @@
-function lifeInWeeks(age){
-    var ageInDays = age * 365;
-    var ageInWeeks = ageInDays / 52; 
-    var ageInMonths = age * 12;
+// function lifeInWeeks(age){
+//     var ageInDays = age * 365;
+//     var ageInWeeks = ageInDays / 52; 
+//     var ageInMonths = age * 12;
 
-    console.log("You are: "+ ageInDays + "Old" + ageInWeeks + ageInMonths);
-}
+//     console.log(ageInDays);
+// }
 
-lifeInWeeks(24);
+// lifeInWeeks(24);
+
+console.log("Hello world!");
