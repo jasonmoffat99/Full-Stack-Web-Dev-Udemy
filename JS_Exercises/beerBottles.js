@@ -17,6 +17,8 @@ function beerBottles (){
 
 // beerBottles();
 
+// Beer bottle loop using for loop
+
 function beerBottles2(){
     for(var i = 99; i > 0; i--){
         if(i <= 99){

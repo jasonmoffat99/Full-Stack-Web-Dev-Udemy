@@ -1,3 +1,5 @@
+// attempt 1
+
 function fibonacciSequence(n){
     output = [];
     for (var i=1; i <= n; i++) {
@@ -15,6 +17,7 @@ function fibonacciSequence(n){
 
 // console.log(fibonacciSequence(15));
 
+// fibonacciSequence attempt 2 
 function fibonacciSequence2(n){
     output = [0, 1];
     for (var i=2; i < n; i++) {
