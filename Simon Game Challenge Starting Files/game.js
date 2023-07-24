@@ -61,5 +61,7 @@ function playSound(name){
     }
 }
 
+nextSequence();
+
 
 
