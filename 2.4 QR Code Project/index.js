@@ -5,7 +5,8 @@
 */
 
 import inquirer from 'inquirer';
-var qr = require('qr-image');
+import qr from "qr-image";
+import fs from "fs";
 
 inquirer
   .prompt([
@@ -17,7 +18,13 @@ inquirer
     // Use user feedback for... whatever!!
     const url = answers.url;
     var qr_svg = qr.image(url);
-    qr_svg.pipe(require('fs').createWriteStream('i_love_qr.png'));
+    qr_svg.pipe(fs.createWriteStream('i_love_qr.png'));
+
+    fs.writeFile('URL.txt', url, (err) => {
+      if (err) throw err;
+      console.log('The file has been saved!');
+    }); 
+
   })
   .catch((error) => {
     if (error.isTtyError) {
