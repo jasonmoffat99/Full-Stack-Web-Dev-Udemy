@@ -6,27 +6,28 @@ const port = 3000;
 const API_URL = "https://secrets-api.appbrewery.com/";
 
 //TODO 1: Fill in your values for the 3 types of auth.
-const yourUsername = "";
-const yourPassword = "";
-const yourAPIKey = "";
-const yourBearerToken = "";
+const yourUsername = "IAmJason";
+const yourPassword = "password";
+const yourAPIKey = "ae7d549e-5316-4e52-aeac-6b7e8242b9ac";
+const yourBearerToken = "33e06cf6-af98-4fc7-af83-0c0f996aac47";
 
 app.get("/", (req, res) => {
   res.render("index.ejs", { content: "API Response." });
 });
 
 app.get("/noAuth", async (req, res) => {
-  try{
-  const response = await axios.get(API_URL+"random");
-  res.render("/noAuth", { 
-    content: JSON.stringify(response)
-   });
-  }catch(err){
+  try {
+  const response = await axios.get(API_URL+"/random");
+  res.render("index.ejs", { 
+        content: JSON.stringify(response.data)
+         });
+      } catch(err)  {
     res.status(404).send(err.message);
   //TODO 2: Use axios to hit up the /random endpoint
   //The data you get back should be sent to the ejs file as "content"
   //Hint: make sure you use JSON.stringify to turn the JS object from axios into a string.
-}});
+    }
+  });
 
 app.get("/basicAuth", (req, res) => {
   //TODO 3: Write your code here to hit up the /all endpoint
