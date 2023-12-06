@@ -46,3 +46,7 @@ app.post("/", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on port: ${port}`);
 });
+
+
+// const response = await axios.get(`https://bored-api.app.com/filter?type=${type}&participants=${participants}`);
+// api name is different fom the solution; 'bored-api.appbrewery.com' instead of 'bpred-api.app.com'
