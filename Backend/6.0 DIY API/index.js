@@ -9,15 +9,75 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //1. GET a random joke
 
-//2. GET a specific joke
+/* app.get uses the express module to reach the /random endpoint
+  req, and res are the parameters for the callback function callback functions */
+  
+app.get('/random', (req, res) => {
+  const randomIndex = Math.floor(Math.random() * jokes.length); // this uses the random functionality to generate a random index number
+  res.json(jokes[randomIndex]);
 
+});
+//2. GET a specific joke
+app.get('/jokes/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  // const foundJoke = jokes.forEach((joke) => joke.id === id);
+  const foundJoke = jokes.find((joke) => joke.id === id);
+  res.json(foundJoke);
+
+})
 //3. GET a jokes by filtering on the joke type
+app.get('/filter', (req, res) => {
+  const type = req.query.type;
+  const findJoke = jokes.filter((joke) => joke.jokeType === type);
+  res.json(findJoke);
+})
 
 //4. POST a new joke
-
+app.post('/jokes', (req, res) => {
+  const newJoke = {
+    id: jokes.length + 1,
+    text: req.body.text,
+    type: req.body.type
+  };
+  jokes.push(newJoke);
+  console.log(jokes.slice(-1));
+  res.json(newJoke);
+});
 //5. PUT a joke
+app.put('/jokes/:id', (req, res) => {
+  const id = parseInt(req.query.id);
+  const replaceJoke = {
+    id: id,
+    jokeText: req.body.text,
+    jokeType: req.body.type,
+  };
+
+  const searchIndex = jokes.findIndex((joke) => joke.id === id);
+  jokes[searchIndex] = replaceJoke;
+  res.json(replaceJoke);
+});
 
 //6. PATCH a joke
+app.patch('/jokes/:id', (req, res) =>{
+  // converts from string into integer value then is checked against the id number of the existsing joke
+  const id = parseInt(req.params.id);
+  const existingJoke = jokes.find((joke) => joke.id === id);
+  //replaces the existing joke "text" and "type" with input from the body
+  // the "||" is an or statement that allows it to either replace it with the input or use the existing value
+  const replaceJoke = {
+    id: id, // id set to equal the id it matches to using the "req.params.id"
+    jokeText: req.body.text || existingJoke.jokeText,
+    jokeType: req.body.type || existingJoke.jokeType,
+  };
+
+  // another search is carried out so that we can replace the existing joke values with the values received from "replaceJoke" 
+  const searchIndex = jokes.find((joke) => joke.id === id);
+  // matches the joke id with the one requested and updates the joke information
+  // we then read this joke out by coverting the js object into a json file as the response method
+  jokes[searchIndex] = replaceJoke;
+  res.json(replaceJoke);
+
+});
 
 //7. DELETE Specific joke
 
